@@ -3,7 +3,7 @@ name: Get latest package stats from pypi
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '0 9 * * 1'
 
 jobs:
   scheduled:
@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Get latest PyPI stats
       run: |
-        curl "https://pypistats.org/api/packages/yahoo-finance-api/overall?mirrors=true" >> stats.json
+        curl "https://pypistats.org/api/packages/yahoo-finance-api/overall?mirrors=true" > stats.json
     - name: Commit and push if s changed
       run: |-
         git config user.name "Automated"

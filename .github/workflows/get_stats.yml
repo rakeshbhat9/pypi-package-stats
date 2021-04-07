@@ -14,6 +14,9 @@ jobs:
     - name: Get latest PyPI stats
       run: |
         curl "https://pypistats.org/api/packages/yahoo-finance-api/overall?mirrors=true" > stats.json
+    - name: Sum total downloads
+      run: |
+        cat stats.json | jq '[.data[] .downloads] | add' > total_count.txt 
     - name: Commit and push if s changed
       run: |-
         git config user.name "Automated"
